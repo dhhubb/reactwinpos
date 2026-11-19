@@ -1,0 +1,136 @@
+import {
+  Product,
+  Customer,
+  Transaction,
+  Account,
+  JournalEntry,
+  Shift,
+  Employee,
+  PayrollRun,
+  User,
+} from '../types';
+
+/**
+ * Factory demonstration dataset (ZAR).
+ *
+ * This is the only place seed data lives; the store imports it so the SQL export,
+ * the snapshot seed and the reset action all agree on the same records.
+ *
+ * Demo credentials are hashed with the same scheme as user-created accounts. The
+ * plain-text passwords are documented here only so the shipped demo logins work:
+ *   admin / admin123      (Administrator)
+ *   manager / manager123  (Manager)
+ *   cashier / cashier123  (Cashier)
+ *   accountant / account123 (Accountant)
+ */
+
+export const initialProducts: Product[] = [
+  { id: 'p1', code: 'SKU-001', name: 'Office Chair Pro', description: 'Ergonomic office chair with lumbar support', category: 'Furniture', price: 299.99, cost: 180.00, stock: 25, taxRate: 15, barcode: '4901234567890' },
+  { id: 'p2', code: 'SKU-002', name: 'Standing Desk', description: 'Electric height-adjustable standing desk', category: 'Furniture', price: 599.99, cost: 350.00, stock: 12, taxRate: 15, barcode: '4901234567891' },
+  { id: 'p3', code: 'SKU-003', name: 'Wireless Mouse', description: 'Ergonomic wireless mouse with USB-C', category: 'Electronics', price: 49.99, cost: 25.00, stock: 100, taxRate: 15, barcode: '4901234567892' },
+  { id: 'p4', code: 'SKU-004', name: 'Mechanical Keyboard', description: 'RGB mechanical keyboard with blue switches', category: 'Electronics', price: 129.99, cost: 65.00, stock: 45, taxRate: 15, barcode: '4901234567893' },
+  { id: 'p5', code: 'SKU-005', name: '27" Monitor 4K', description: '27-inch 4K UHD IPS Monitor', category: 'Electronics', price: 449.99, cost: 280.00, stock: 18, taxRate: 15, barcode: '4901234567894' },
+  { id: 'p6', code: 'SKU-006', name: 'Laptop Stand', description: 'Adjustable aluminum laptop stand', category: 'Accessories', price: 39.99, cost: 18.00, stock: 60, taxRate: 15, barcode: '4901234567895' },
+  { id: 'p7', code: 'SKU-007', name: 'USB-C Hub', description: '7-in-1 USB-C hub with HDMI, SD card', category: 'Electronics', price: 34.99, cost: 16.00, stock: 80, taxRate: 15, barcode: '4901234567896' },
+  { id: 'p8', code: 'SKU-008', name: 'Desk Lamp LED', description: 'LED desk lamp with wireless charging base', category: 'Accessories', price: 79.99, cost: 40.00, stock: 35, taxRate: 15, barcode: '4901234567897' },
+  { id: 'p9', code: 'SKU-009', name: 'Office Headset', description: 'Noise-cancelling wireless headset for calls', category: 'Electronics', price: 199.99, cost: 110.00, stock: 22, taxRate: 15, barcode: '4901234567898' },
+  { id: 'p10', code: 'SKU-010', name: 'Monitor Arm', description: 'Gas spring monitor arm for desk mounting', category: 'Accessories', price: 89.99, cost: 45.00, stock: 30, taxRate: 15, barcode: '4901234567899' },
+  { id: 'p11', code: 'SKU-011', name: 'Filing Cabinet', description: '3-drawer vertical filing cabinet, lockable', category: 'Furniture', price: 159.99, cost: 90.00, stock: 15, taxRate: 15, barcode: '4901234567800' },
+  { id: 'p12', code: 'SKU-012', name: 'Ergonomic Footrest', description: 'Adjustable footrest for under desk', category: 'Accessories', price: 29.99, cost: 14.00, stock: 55, taxRate: 15, barcode: '4901234567801' },
+];
+
+export const initialCustomers: Customer[] = [
+  { id: 'c1', code: 'CUST-001', name: 'ABC Corporation', email: 'info@abccorp.com', phone: '+1-555-0101', address: '123 Business Ave, Suite 400, New York, NY 10001', creditLimit: 25000, balance: 4500.00 },
+  { id: 'c2', code: 'CUST-002', name: 'Smith & Partners', email: 'contact@smithpartners.com', phone: '+1-555-0102', address: '456 Commerce Blvd, Los Angeles, CA 90001', creditLimit: 15000, balance: 2300.50 },
+  { id: 'c3', code: 'CUST-003', name: 'TechStart Inc', email: 'hello@techstart.io', phone: '+1-555-0103', address: '789 Innovation Dr, San Francisco, CA 94105', creditLimit: 50000, balance: 12500.75 },
+  { id: 'c4', code: 'CUST-004', name: 'GreenLeaf Enterprises', email: 'orders@greenleaf.com', phone: '+1-555-0104', address: '321 Park Road, Chicago, IL 60601', creditLimit: 10000, balance: 750.00 },
+  { id: 'c5', code: 'CUST-005', name: 'Digital Solutions Ltd', email: 'info@digitalsolutions.com', phone: '+1-555-0105', address: '555 Tech Park, Austin, TX 78701', creditLimit: 30000, balance: 8900.00 },
+  { id: 'c6', code: 'CUST-006', name: 'Walker Construction', email: 'admin@walkerconst.com', phone: '+1-555-0106', address: '888 Builder St, Denver, CO 80201', creditLimit: 75000, balance: 34000.00 },
+];
+
+export const initialTransactions: Transaction[] = [
+  { id: 't1', date: '2025-01-15', type: 'sale', description: 'Office equipment purchase', customerId: 'c1', customerName: 'ABC Corporation', amount: 2899.99, tax: 435.00, total: 3334.99, status: 'paid', items: [{ productId: 'p1', productName: 'Office Chair Pro', quantity: 5, price: 299.99 }, { productId: 'p5', productName: '27" Monitor 4K', quantity: 3, price: 449.99 }] },
+  { id: 't2', date: '2025-01-18', type: 'sale', description: 'Workstation setup', customerId: 'c3', customerName: 'TechStart Inc', amount: 4299.92, tax: 645.00, total: 4944.92, status: 'paid', items: [{ productId: 'p2', productName: 'Standing Desk', quantity: 4, price: 599.99 }, { productId: 'p10', productName: 'Monitor Arm', quantity: 8, price: 89.99 }, { productId: 'p9', productName: 'Office Headset', quantity: 4, price: 199.99 }] },
+  { id: 't3', date: '2025-02-01', type: 'sale', description: 'IT accessories order', customerId: 'c2', customerName: 'Smith & Partners', amount: 839.85, tax: 126.00, total: 965.85, status: 'paid', items: [{ productId: 'p3', productName: 'Wireless Mouse', quantity: 10, price: 49.99 }, { productId: 'p4', productName: 'Mechanical Keyboard', quantity: 3, price: 129.99 }] },
+  { id: 't4', date: '2025-02-10', type: 'sale', description: 'Office furniture bulk order', customerId: 'c6', customerName: 'Walker Construction', amount: 5599.65, tax: 839.95, total: 6439.60, status: 'pending', items: [{ productId: 'p1', productName: 'Office Chair Pro', quantity: 10, price: 299.99 }, { productId: 'p11', productName: 'Filing Cabinet', quantity: 8, price: 159.99 }, { productId: 'p8', productName: 'Desk Lamp LED', quantity: 15, price: 79.99 }] },
+  { id: 't5', date: '2025-02-20', type: 'sale', description: 'Hardware upgrade', customerId: 'c5', customerName: 'Digital Solutions Ltd', amount: 2349.95, tax: 352.49, total: 2702.44, status: 'overdue', items: [{ productId: 'p5', productName: '27" Monitor 4K', quantity: 3, price: 449.99 }, { productId: 'p7', productName: 'USB-C Hub', quantity: 15, price: 34.99 }, { productId: 'p6', productName: 'Laptop Stand', quantity: 10, price: 39.99 }] },
+  { id: 't6', date: '2025-03-01', type: 'payment', description: 'Payment received for invoice INV-004', customerId: 'c1', customerName: 'ABC Corporation', amount: 1500.00, tax: 0, total: 1500.00, status: 'paid' },
+  { id: 't7', date: '2025-03-05', type: 'sale', description: 'New office setup', customerId: 'c4', customerName: 'GreenLeaf Enterprises', amount: 749.94, tax: 112.49, total: 862.43, status: 'pending', items: [{ productId: 'p2', productName: 'Standing Desk', quantity: 1, price: 599.99 }, { productId: 'p8', productName: 'Desk Lamp LED', quantity: 1, price: 79.99 }, { productId: 'p12', productName: 'Ergonomic Footrest', quantity: 3, price: 29.99 }] },
+  { id: 't8', date: '2025-03-12', type: 'expense', description: 'Office rent payment', amount: 5000.00, tax: 0, total: 5000.00, status: 'paid' },
+  { id: 't9', date: '2025-03-15', type: 'sale', description: 'Walk-in customer purchase', amount: 179.97, tax: 27.00, total: 206.97, status: 'paid', items: [{ productId: 'p3', productName: 'Wireless Mouse', quantity: 1, price: 49.99 }, { productId: 'p6', productName: 'Laptop Stand', quantity: 2, price: 39.99 }, { productId: 'p12', productName: 'Ergonomic Footrest', quantity: 1, price: 29.99 }] },
+  { id: 't10', date: '2025-03-20', type: 'sale', description: 'Bulk order - IT equipment', customerId: 'c5', customerName: 'Digital Solutions Ltd', amount: 3999.90, tax: 599.99, total: 4599.89, status: 'pending', items: [{ productId: 'p4', productName: 'Mechanical Keyboard', quantity: 10, price: 129.99 }, { productId: 'p3', productName: 'Wireless Mouse', quantity: 30, price: 49.99 }, { productId: 'p7', productName: 'USB-C Hub', quantity: 20, price: 34.99 }] },
+];
+
+export const initialAccounts: Account[] = [
+  { id: 'a1', code: '1000', name: 'Cash at Bank', type: 'asset', balance: 125000.00 },
+  { id: 'a2', code: '1100', name: 'Accounts Receivable', type: 'asset', balance: 63400.75 },
+  { id: 'a3', code: '1200', name: 'Inventory', type: 'asset', balance: 89200.50 },
+  { id: 'a4', code: '1300', name: 'Fixed Assets', type: 'asset', balance: 250000.00 },
+  { id: 'a5', code: '2000', name: 'Accounts Payable', type: 'liability', balance: 32000.00 },
+  { id: 'a6', code: '2100', name: 'Sales Tax Payable', type: 'liability', balance: 12400.00 },
+  { id: 'a7', code: '2200', name: 'Salaries Payable', type: 'liability', balance: 18500.00 },
+  { id: 'a8', code: '3000', name: 'Owner\'s Equity', type: 'equity', balance: 350000.00 },
+  { id: 'a9', code: '3100', name: 'Retained Earnings', type: 'equity', balance: 84401.25 },
+  { id: 'a10', code: '4000', name: 'Sales Revenue', type: 'revenue', balance: 285000.00 },
+  { id: 'a11', code: '4100', name: 'Service Revenue', type: 'revenue', balance: 45000.00 },
+  { id: 'a12', code: '5000', name: 'Cost of Goods Sold', type: 'expense', balance: 156000.00 },
+  { id: 'a13', code: '5100', name: 'Salaries & Wages', type: 'expense', balance: 95000.00 },
+  { id: 'a14', code: '5200', name: 'Rent Expense', type: 'expense', balance: 36000.00 },
+  { id: 'a15', code: '5300', name: 'Utilities', type: 'expense', balance: 8500.00 },
+  { id: 'a16', code: '5400', name: 'Office Supplies', type: 'expense', balance: 4200.00 },
+];
+
+export const initialJournalEntries: JournalEntry[] = [
+  { id: 'j1', date: '2025-01-31', description: 'Monthly sales revenue closing', reference: 'JE-2025-001', debits: [{ accountId: 'a10', accountName: 'Sales Revenue', amount: 285000.00 }], credits: [{ accountId: 'a8', accountName: 'Owner\'s Equity', amount: 285000.00 }] },
+  { id: 'j2', date: '2025-02-28', description: 'Cost of goods sold adjustment', reference: 'JE-2025-002', debits: [{ accountId: 'a12', accountName: 'Cost of Goods Sold', amount: 156000.00 }], credits: [{ accountId: 'a3', accountName: 'Inventory', amount: 156000.00 }] },
+  { id: 'j3', date: '2025-03-15', description: 'Monthly rent accrual', reference: 'JE-2025-003', debits: [{ accountId: 'a14', accountName: 'Rent Expense', amount: 5000.00 }], credits: [{ accountId: 'a5', accountName: 'Accounts Payable', amount: 5000.00 }] },
+];
+
+export const initialShifts: Shift[] = [
+  { id: 's1', userId: 'u3', userName: 'Cashier Sarah', openedAt: '2025-03-20T08:00:00', closedAt: '2025-03-20T16:00:00', openingCash: 500, closingCash: 3200, expectedCash: 3150, countedCash: 3200, difference: 50, status: 'closed', transactionCount: 24, totalSales: 2650, notes: 'Normal shift' },
+  { id: 's2', userId: 'u2', userName: 'Manager Mike', openedAt: '2025-03-21T08:00:00', closedAt: '2025-03-21T17:00:00', openingCash: 800, closingCash: 5400, expectedCash: 5350, countedCash: 5400, difference: 50, status: 'closed', transactionCount: 31, totalSales: 4550, notes: 'Busy day' },
+  { id: 's3', userId: 'u3', userName: 'Cashier Sarah', openedAt: '2025-03-22T08:00:00', status: 'open', openingCash: 600, transactionCount: 5, totalSales: 850 },
+];
+
+export const initialEmployees: Employee[] = [
+  { id: 'e1', code: 'EMP-001', name: 'Thabo Mokoena', position: 'Store Manager', department: 'Management', salary: 25000, payFrequency: 'monthly', bankAccount: '62301456789', taxNumber: '0123456789', status: 'active', hireDate: '2023-01-15', email: 'thabo@badboy.co.za', phone: '+27-82-123-4567' },
+  { id: 'e2', code: 'EMP-002', name: 'Sarah Nkosi', position: 'Cashier', department: 'Sales', salary: 8500, payFrequency: 'monthly', bankAccount: '62301456790', taxNumber: '0123456790', status: 'active', hireDate: '2023-06-01', email: 'sarah@badboy.co.za', phone: '+27-82-234-5678' },
+  { id: 'e3', code: 'EMP-003', name: 'Mike van Wyk', position: 'Accountant', department: 'Finance', salary: 22000, payFrequency: 'monthly', bankAccount: '62301456791', taxNumber: '0123456791', status: 'active', hireDate: '2022-11-20', email: 'mike@badboy.co.za', phone: '+27-82-345-6789' },
+  { id: 'e4', code: 'EMP-004', name: 'Lerato Dube', position: 'Sales Associate', department: 'Sales', salary: 9000, payFrequency: 'monthly', bankAccount: '62301456792', taxNumber: '0123456792', status: 'active', hireDate: '2024-02-10', email: 'lerato@badboy.co.za', phone: '+27-82-456-7890' },
+  { id: 'e5', code: 'EMP-005', name: 'Sipho Khumalo', position: 'Warehouse Staff', department: 'Operations', salary: 7500, payFrequency: 'weekly', bankAccount: '62301456793', taxNumber: '0123456793', status: 'active', hireDate: '2024-05-15', email: 'sipho@badboy.co.za', phone: '+27-82-567-8901' },
+  { id: 'e6', code: 'EMP-006', name: 'Nomsa Mahlangu', position: 'HR Officer', department: 'HR', salary: 18000, payFrequency: 'monthly', bankAccount: '62301456794', taxNumber: '0123456794', status: 'active', hireDate: '2023-09-01', email: 'nomsa@badboy.co.za', phone: '+27-82-678-9012' },
+];
+
+export const initialPayrollRuns: PayrollRun[] = [
+  {
+    id: 'pr1', period: 'February 2025', runDate: '2025-02-28', status: 'paid',
+    entries: [
+      { employeeId: 'e1', employeeName: 'Thabo Mokoena', gross: 25000, tax: 4500, net: 20500, status: 'paid' },
+      { employeeId: 'e2', employeeName: 'Sarah Nkosi', gross: 8500, tax: 765, net: 7735, status: 'paid' },
+      { employeeId: 'e3', employeeName: 'Mike van Wyk', gross: 22000, tax: 3960, net: 18040, status: 'paid' },
+      { employeeId: 'e4', employeeName: 'Lerato Dube', gross: 9000, tax: 810, net: 8190, status: 'paid' },
+      { employeeId: 'e5', employeeName: 'Sipho Khumalo', gross: 7500, tax: 675, net: 6825, status: 'paid' },
+      { employeeId: 'e6', employeeName: 'Nomsa Mahlangu', gross: 18000, tax: 3240, net: 14760, status: 'paid' },
+    ],
+    totalGross: 90000, totalTax: 13950, totalNet: 76050,
+  },
+  {
+    id: 'pr2', period: 'January 2025', runDate: '2025-01-31', status: 'paid',
+    entries: [
+      { employeeId: 'e1', employeeName: 'Thabo Mokoena', gross: 25000, tax: 4500, net: 20500, status: 'paid' },
+      { employeeId: 'e2', employeeName: 'Sarah Nkosi', gross: 8500, tax: 765, net: 7735, status: 'paid' },
+      { employeeId: 'e3', employeeName: 'Mike van Wyk', gross: 22000, tax: 3960, net: 18040, status: 'paid' },
+      { employeeId: 'e4', employeeName: 'Lerato Dube', gross: 9000, tax: 810, net: 8190, status: 'paid' },
+      { employeeId: 'e5', employeeName: 'Sipho Khumalo', gross: 7500, tax: 675, net: 6825, status: 'paid' },
+      { employeeId: 'e6', employeeName: 'Nomsa Mahlangu', gross: 18000, tax: 3240, net: 14760, status: 'paid' },
+    ],
+    totalGross: 90000, totalTax: 13950, totalNet: 76050,
+  },
+];
+
+export const SEED_USERS: User[] = [
+  { id: 'u1', username: 'admin', password: '', passwordHash: 'sha256i$4096$seed-salt-u1-afritecx$99da1c5326c99d25734d16fcadda1cd5f4fa40fec5f259939f9519b86d79c660', fullName: 'Administrator', email: 'admin@badboy.co.za', role: 'admin', active: true, lastLogin: '2025-03-22T08:30:00' },
+  { id: 'u2', username: 'manager', password: '', passwordHash: 'sha256i$4096$seed-salt-u2-afritecx$f6372759f4149b9864d466e4e2371a59cd6202ea52ddec7e4b888b060b5e71b2', fullName: 'Manager Mike', email: 'mike@badboy.co.za', role: 'manager', active: true, lastLogin: '2025-03-21T08:00:00' },
+  { id: 'u3', username: 'cashier', password: '', passwordHash: 'sha256i$4096$seed-salt-u3-afritecx$be1b226cac6dd7c613c473ca82718586c0bde9d28656f773b1dd2b31199f9743', fullName: 'Cashier Sarah', email: 'sarah@badboy.co.za', role: 'cashier', active: true, lastLogin: '2025-03-22T08:00:00' },
+  { id: 'u4', username: 'accountant', password: '', passwordHash: 'sha256i$4096$seed-salt-u4-afritecx$3aea3093463e8fa325c60f882371943e8a277073e93481568badf419734e97a4', fullName: 'Accountant Mike', email: 'accountant@badboy.co.za', role: 'accountant', active: true },
+];

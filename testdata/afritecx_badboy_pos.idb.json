@@ -1,0 +1,51 @@
+{
+  "generatedAt": "2026-11-19T15:13:34.641Z",
+  "origin": "http://127.0.0.1:4319",
+  "database": {
+    "name": "afritecx_badboy_pos",
+    "version": 1
+  },
+  "stores": [
+    "appState",
+    "auditLog"
+  ],
+  "totalRecords": 62,
+  "recordCounts": {
+    "products": 12,
+    "customers": 6,
+    "transactions": 10,
+    "accounts": 16,
+    "journalEntries": 3,
+    "shifts": 3,
+    "employees": 6,
+    "payrollRuns": 2,
+    "users": 4,
+    "businessProfile": 1,
+    "snapshots": 0
+  },
+  "auditRecords": 1,
+  "trialBalanceBalanced": true,
+  "users": [
+    {
+      "username": "admin",
+      "role": "admin",
+      "hashed": true
+    },
+    {
+      "username": "manager",
+      "role": "manager",
+      "hashed": true
+    },
+    {
+      "username": "cashier",
+      "role": "cashier",
+      "hashed": true
+    },
+    {
+      "username": "accountant",
+      "role": "accountant",
+      "hashed": true
+    }
+  ],
+  "leveldbCopied": true
+}
