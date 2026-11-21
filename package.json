@@ -1,5 +1,6 @@
 {
   "name": "afritecx-badboy-pos",
+  "productName": "Afritecx Badboy POS",
   "private": true,
   "version": "1.0.0",
   "type": "module",
@@ -72,7 +73,7 @@
         }
       ],
       "icon": "build/icon.ico",
-      "artifactName": "AfritecxBadboyPOS-${version}-${arch}.${ext}"
+      "artifactName": "AfritecxBadboyPOS-Setup-${version}-${arch}.${ext}"
     },
     "nsis": {
       "oneClick": false,
@@ -82,6 +83,9 @@
       "createStartMenuShortcut": true,
       "shortcutName": "Afritecx Badboy POS",
       "deleteAppDataOnUninstall": false
+    },
+    "portable": {
+      "artifactName": "AfritecxBadboyPOS-Portable-${version}-${arch}.${ext}"
     }
   }
 }
